@@ -36,6 +36,7 @@ namespace ItemPlanner.ConstructorModule
 
         private void ObjectChosen(IObjectController chosenObject)
         {
+            Debug.Log("CC ObjectChosen");
             isChosenObject = true;
             lastChosenObject = chosenObject;
             ShowCreateButton();
@@ -43,6 +44,7 @@ namespace ItemPlanner.ConstructorModule
 
         private void WallSelected(IWallController wall)
         {
+            Debug.Log("CC WallChosen");
             isChosenWall = true;
             lastChosenWall?.Deselect();
             lastChosenWall = wall;

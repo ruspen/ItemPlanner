@@ -15,8 +15,7 @@ namespace ItemPlanner.ConstructorModule.CreatorModule
 
         public void Create(IWallController wall, IObjectController someObject)
         {
-            someObject.Init();
-            someObject.InstantObject(wall.GetCentre());
+            someObject.Init(wall.GetCentre());
         }
 
         public void Delete(IObjectController someObject)

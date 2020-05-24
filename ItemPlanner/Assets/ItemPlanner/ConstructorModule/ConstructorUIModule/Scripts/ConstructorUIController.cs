@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ItemPlanner.ConstructorModule.ConstructorUIModule
@@ -46,16 +47,29 @@ namespace ItemPlanner.ConstructorModule.ConstructorUIModule
 
         void Update()
         {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.gameObject.GetComponent<WallController>())
+                if (Physics.Raycast(ray, out hit))
                 {
-                    OnWallSelected?.Invoke(hit.collider.gameObject.GetComponent<WallController>());
+                    if (!IsPointerOverUIObject() && hit.collider.gameObject.GetComponent<WallController>())
+                    {
+                        Debug.Log("hit");
+                        OnWallSelected?.Invoke(hit.collider.gameObject.GetComponent<WallController>());
+                    }
                 }
             }
         }
 
+        private bool IsPointerOverUIObject()
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
+        }
 
         private void CreateObjectButtons()
         {
@@ -67,6 +81,7 @@ namespace ItemPlanner.ConstructorModule.ConstructorUIModule
                     OnObjectChosen?.Invoke(item.ObjectPrefab);
                 });
                 newButton.image.sprite = item.Image;
+                newButton.GetComponentInChildren<Text>().text = item.Name;
             }
         }
 

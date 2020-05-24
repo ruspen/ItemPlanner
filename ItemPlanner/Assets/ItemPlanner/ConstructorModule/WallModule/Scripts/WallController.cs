@@ -18,12 +18,12 @@ namespace ItemPlanner.ConstructorModule.WallModule
 
         public void Select()
         {
-            mainMeshRenderer.materials[0] = Resources.Load<Material>(WallData.WALL_SELECTED_MATERIAL_PATH);
+            mainMeshRenderer.material = Resources.Load<Material>(WallData.WALL_SELECTED_MATERIAL_PATH);
         }
 
         public void Deselect()
         {
-            mainMeshRenderer.materials[0] = Resources.Load<Material>(WallData.WALL_MATERIAL_PATH);
+            mainMeshRenderer.material = Resources.Load<Material>(WallData.WALL_MATERIAL_PATH);
         }
 
 

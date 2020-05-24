@@ -9,8 +9,7 @@ namespace ItemPlanner.ConstructorModule.ObjectModule
     {
         event Action OnColliderEnter;
         event Action OnColliderExit;
-        void Init();
-        void InstantObject(Vector3 instantPosition);
+        void Init(Vector3 instantPosition);
         void Delete();
     }
 }

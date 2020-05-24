@@ -15,15 +15,11 @@ namespace ItemPlanner.ConstructorModule.ObjectModule
             throw new NotImplementedException();
         }
 
-        public void Init()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InstantObject(Vector3 instantPosition)
+        public void Init(Vector3 instantPosition)
         {
             GameObject.Instantiate(this, instantPosition, Quaternion.identity);
         }
+
 
         // Start is called before the first frame update
         void Start()
